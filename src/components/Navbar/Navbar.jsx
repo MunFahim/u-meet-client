@@ -1,7 +1,7 @@
 //import React from 'react'
 import './navbar.css'
-import logo from './../../images/U-meet_Logo.png'
-import logoTxt from './../../images/U-meet_text-trans.png'
+import logo from './../../images/logo.png'
+import logoTxt from './../../images/textLogo.png'
 function Navbar() {
   return (
     <>
