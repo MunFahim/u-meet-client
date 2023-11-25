@@ -23,6 +23,7 @@ function Video({ useSocket }) {
       host: 'u-meet-peerserver.onrender.com',
       port: 443,
       path: '/',
+      secure: true
     })
     //console.log('testing')
     peer.on('open', (id)=>{
