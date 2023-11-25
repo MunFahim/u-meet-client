@@ -52,10 +52,13 @@
     color: red;
 }
 .stop-user{
-    background-color: rgb(255, 54, 23);
+    flex: 0.1;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(255, 82, 55);
 }
 .stop-user:hover{
-    background-color: rgb(197, 38, 13);
+    background-color: rgb(255, 62, 32);
 }
 
 @media (max-width: 900px) {
