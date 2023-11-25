@@ -20,7 +20,7 @@ function Video({ useSocket }) {
   
   useMemo(()=>{
     const peer = new Peer({
-      host: 'https://u-meet-peerserver.onrender.com/',
+      host: 'u-meet-peerserver.onrender.com',
       path: '/',
     })
     //console.log('testing')
