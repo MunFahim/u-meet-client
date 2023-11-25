@@ -45,7 +45,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
 }
 
 
@@ -54,7 +53,7 @@
         font-size: 30px;
     }
     .userContent{
-        padding: 0px 24px;
+        padding: 65px;
         height: 45%;
     }
 }
