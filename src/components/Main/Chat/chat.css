@@ -1,0 +1,63 @@
+.chat-container{
+    display: flex;
+    background-color: rgba(247, 0, 0, 0);
+    border-radius: 8px;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px;
+    margin: 12px 12px 12px 0px;
+    gap: 8px;
+    
+}
+.chat-show{
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    overflow-y: scroll;
+    padding: 0px 10px;
+    flex: 2;
+
+}
+.chat-input{
+    flex: 0.15;
+    display: flex;
+    height: 100%;
+    gap: 6px;
+}
+ .enter-input{
+    flex: 0.1
+ }
+
+.type-text{
+    font-size: 16px;
+    padding: 8px;
+    flex: 1;
+}
+.refresh{
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(255, 128, 54);    
+    flex: 0.1
+}
+.refresh:hover{
+    background-color: rgba(255, 120, 41, 0.507);
+}
+
+.originalUser{
+    color: green;
+}
+
+.connectedUser{
+    color: red;
+}
+
+
+@media (max-width: 900px) {
+
+    .chat-container{
+        background-color: rgb(255, 128, 54);
+        width: 90%;
+    }
+    .refresh{
+        background-color: rgb(255, 180, 136);
+    }
+  }
