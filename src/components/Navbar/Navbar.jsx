@@ -13,7 +13,6 @@ function Navbar() {
             <div className="nav-end">
                 <ul>
                     <li>google</li>
-                    <li>twitter</li>
                 </ul>
             </div>
         </nav>
