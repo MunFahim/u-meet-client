@@ -21,7 +21,7 @@ function Video({ useSocket }) {
   useMemo(()=>{
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
-      port: 3000,
+      port: 443,
       path: 'peerjs',
       secure: true
     })
