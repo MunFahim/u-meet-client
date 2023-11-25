@@ -22,7 +22,7 @@ function Video({ useSocket }) {
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
       port: 3000,
-      path: '/',
+      path: 'peerjs',
       secure: true
     })
     //console.log('testing')
