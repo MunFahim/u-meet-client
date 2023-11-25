@@ -34,12 +34,12 @@
 }
 .submitUserInput{
     padding: 8px;
-    background-color: rgb(204, 130, 18);
-    border: none;
+    background-color: rgb(255, 177, 61)
 }
-.submitUserInput{
-    background-color: rgb(155, 95, 7);
+.submitUserInput:hover{
+    background-color: rgb(255, 159, 14)
 }
+
 .userEnter{
     display: flex;
     flex-wrap: wrap;
