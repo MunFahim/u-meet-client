@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import './chat.css'
 import {useState } from 'react'
 //import io from 'socket.io-client'
-
+import {v4 as uuidv4} from 'uuid'
 
 // eslint-disable-next-line react/prop-types
 function Chat({useSocket, userIs}) {
@@ -122,14 +122,13 @@ function Chat({useSocket, userIs}) {
     const sendMsg = () => {
       if (msg.trim() != ''){
         socket.emit('message', msg, userIs);
-        console.log('sending msgg')
         setMsg('')
       }
     }
 
   const connectToRandomUser = () =>{
     setSearching(true)
-    const roomId = Math.random().toString(36).substring(7);
+    const roomId = uuidv4()
     socket.emit('joinRoom', roomId, 1);
   }
   
@@ -155,7 +154,7 @@ function Chat({useSocket, userIs}) {
                 disconnectUser()
               }
             }}>
-                { !searching ? <button className='refresh' onClick={connectToRandomUser}>New <br/> esc</button> : <button className='refresh' onClick={disconnectUser}>STOP</button>}
+                { !searching ? <button className='refresh' onClick={connectToRandomUser}>New <br/> esc</button> : <button className='stop-user' onClick={disconnectUser}>STOP</button>}
                 <input className='type-text' onKeyDown={(e)=>{
                   if (e.key == 'Enter'){
                     sendMsg()

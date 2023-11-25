@@ -43,13 +43,20 @@
 }
 
 .originalUser{
+    font-weight: bold;
     color: green;
 }
 
 .connectedUser{
+    font-weight: bold;
     color: red;
 }
-
+.stop-user{
+    background-color: rgb(255, 54, 23);
+}
+.stop-user:hover{
+    background-color: rgb(197, 38, 13);
+}
 
 @media (max-width: 900px) {
 
