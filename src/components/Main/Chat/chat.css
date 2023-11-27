@@ -15,8 +15,11 @@
     overflow-y: scroll;
     padding: 0px 10px;
     flex: 2;
-
 }
+.the-chat{
+    max-height: 50px;
+}
+
 .chat-input{
     flex: 0.15;
     display: flex;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 //import React from 'react'
 import './chat.css'
 import {useState } from 'react'
@@ -12,9 +12,10 @@ function Chat({useSocket, userIs}) {
   const [searching, setSearching] = useState(false)
   const [found, setFound] = useState(false)
   const [msg, setMsg] = useState('')
+  const scrollRef = useRef(null)
 
   // array of messages to be rendered
-  let [msgList, setMsgList] = useState([
+  const [msgList, setMsgList] = useState([
     {
       user: 'Ome',
       message: 'WELCOME TO THE CHAT',
@@ -65,66 +66,74 @@ function Chat({useSocket, userIs}) {
     ])
   }
 
-
-    useEffect(() => {
-      if (socket) {
-        //console.log('Setting up event listeners');
-    
-        const handleSearch = () => {
-          looking();
-        };
-    
-        const handleConnectedUser = (data) => {
-          //console.log('User connected');
-          if (data.user === true) {
-            setFound(true);
-            foundConnection();
-          }
-        };
-    
-        const handleLeaveRoom = () => {
-          setFound(false);
-          reset();
-        };
-    
-        const handleMessage = (data) => {
-          const username = data.id;
-          const nick = data.nick
-          const newMsg = data.message;
-          setMsgList((prevMsgList) => [
-            ...prevMsgList,
-            {
-              user: nick,
-              message: newMsg,
-              socketUser: username === socket.id ? 'originalUser' : 'connectedUser',
-            },
-          ]);
-        };
-    
-        // Set up event listeners
-        socket.on('search', handleSearch);
-        socket.on('connectedUser', handleConnectedUser);
-        socket.on('leaveRoom', handleLeaveRoom);
-        socket.on('message', handleMessage);
-    
-        // Cleanup function to remove previous event listeners
-        return () => {
-          //console.log('Cleaning up event listeners');
-          socket.off('search', handleSearch);
-          socket.off('connectedUser', handleConnectedUser);
-          socket.off('leaveRoom', handleLeaveRoom);
-          socket.off('message', handleMessage);
-        };
-      }
-    }, [socket]);
-
-
-    const sendMsg = () => {
-      if (msg.trim() != ''){
-        socket.emit('message', msg, userIs);
-        setMsg('')
-      }
+  useEffect(()=>{
+    if (msgList.length){
+      scrollRef.current?.scrollIntoView({
+        behavior: "smooth",
+        display: 'block'
+      })
     }
+  },[msgList.length])
+
+  useEffect(() => {
+    if (socket) {
+      //console.log('Setting up event listeners');
+  
+      const handleSearch = () => {
+        looking();
+      };
+  
+      const handleConnectedUser = (data) => {
+        //console.log('User connected');
+        if (data.user === true) {
+          setFound(true);
+          foundConnection();
+        }
+      };
+  
+      const handleLeaveRoom = () => {
+        setFound(false);
+        reset();
+      };
+  
+      const handleMessage = (data) => {
+        const username = data.id;
+        const nick = data.nick
+        const newMsg = data.message;
+        setMsgList((prevMsgList) => [
+          ...prevMsgList,
+          {
+            user: nick,
+            message: newMsg,
+            socketUser: username === socket.id ? 'originalUser' : 'connectedUser',
+          },
+        ]);
+      };
+  
+      // Set up event listeners
+      socket.on('search', handleSearch);
+      socket.on('connectedUser', handleConnectedUser);
+      socket.on('leaveRoom', handleLeaveRoom);
+      socket.on('message', handleMessage);
+  
+      // Cleanup function to remove previous event listeners
+      return () => {
+        //console.log('Cleaning up event listeners');
+        socket.off('search', handleSearch);
+        socket.off('connectedUser', handleConnectedUser);
+        socket.off('leaveRoom', handleLeaveRoom);
+        socket.off('message', handleMessage);
+      };
+    }
+  }, [socket]);
+
+
+  const sendMsg = () => {
+    if (msg.trim() != ''){
+      socket.emit('message', msg, userIs);
+      setMsg('')
+    }
+  }
 
   const connectToRandomUser = () =>{
     setSearching(true)
@@ -144,10 +153,12 @@ function Chat({useSocket, userIs}) {
     <>
         <div className='chat-container'>
             <div className='chat-show'>
-              {msgList.map((theMsg, i)=>{
-                return <p key={i}><span className={theMsg.socketUser}>{theMsg.user}</span> : {theMsg.message}</p>
-              })}
-              
+            <div className='the-chat'>
+                {msgList.map((theMsg, i)=>{
+                  return <p key={i}><span className={theMsg.socketUser}>{theMsg.user}</span> : {theMsg.message}</p>
+                })}
+                <p ref={scrollRef}/>
+              </div>
             </div>
             <div className='chat-input' onKeyDown={(e)=>{
               if (e.key === 'Escape' && searching === true){
