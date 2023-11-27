@@ -22,3 +22,11 @@
     margin-right: 50px;
     gap: 40px;
 }
+.nav-link{
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+}
+.nav-link:hover{
+    color: grey;
+}
