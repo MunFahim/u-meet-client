@@ -15,12 +15,13 @@
     justify-content: center;
 }
 .user-video{
-    height: 100%; 
+    width: 100%;
     max-width: 100%;
 }
 
+
 .video-box{
-    background-color: rgba(109, 109, 109, 0.5);
+    background-color: rgba(109, 109, 109, 0.308);
     /*border: 2px solid blue;*/
     border-radius: 4px;
     /* CHANGE THE HEIGHT OF THE VIDEO BOXES*/
@@ -42,10 +43,10 @@
     }
     .user-video{
         height: auto;
+        max-height: 400px;
     }
     .video-box{
         height: auto;
-        max-height: 410px;
     }
     .user-one{
         width: 50%;
