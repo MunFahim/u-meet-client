@@ -99,7 +99,7 @@ function Video({ useSocket }) {
   return (
     <>
         <div className='video-container'>
-            <div className='video-box user-two' style={gotUser ? {} : {backgroundColor: 'rgba(109, 109, 109, 0.425)'}}>
+            <div className='video-box user-two' style={gotUser ? {backgroundColor: 'rgba(109, 109, 109, 0.425)'} : {}}>
                <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%',borderRadius: '4px', objectFit: 'cover'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
             </div>
             <div className='video-box user-one'>
