@@ -18,7 +18,7 @@ function Video({ useSocket }) {
   const callRef = useRef(null);
   const peerRef = useRef(null)
   const [gotUser, setGotUser] = useState(false)
-
+  const [gotCam, setGotCam] = useState(false)
   useMemo(()=>{
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
@@ -44,6 +44,7 @@ function Video({ useSocket }) {
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
       videoRef.current.srcObject = stream;
+      setGotCam(true)
       //setVideoStream(stream);
     }).catch(error=>{
       console.log('could not get camera media', error)
@@ -100,10 +101,10 @@ function Video({ useSocket }) {
     <>
         <div className='video-container'>
             <div className='video-box user-two' style={gotUser ? {backgroundColor: 'rgba(109, 109, 109, 0.425)'} : {}}>
-               <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%',borderRadius: '4px', objectFit: 'cover'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
+              <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%',borderRadius: '4px', objectFit: 'contain'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
             </div>
-            <div className='video-box user-one'>
-              <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth: '100%', borderRadius: '4px', objectFit: 'cover'}} ref={videoRef} playsInline autoPlay muted={true}></video>
+            <div className='video-box user-one' style={gotCam ? {backgroundColor: 'rgba(109, 109, 109, 0.425)'} : {}}>
+              <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%', borderRadius: '4px', objectFit: 'contain'}} ref={videoRef} playsInline autoPlay muted={true}></video>
             </div>
         </div>
     </>

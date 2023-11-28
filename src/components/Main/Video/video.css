@@ -11,6 +11,7 @@
 .video-box{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .video-box{
     overflow: hidden;
@@ -28,18 +29,14 @@
 }
 @media (max-width: 900px) {
     .video-container{
-        width: 600px;
-        align-items: 'stretch';
+        width: 95%;
+       align-items: center;
+    }
+    .user-one{
+        flex: 1;
+        width: 50%;
+    }
+    .user-two{
+        flex: 2;
     }
   }
-  @media (max-width: 600px) {
-    .video-container{
-        width: 500px;
-    }
-}
-
-@media (max-width: 500px) {
-    .video-container{
-        width: 380px;
-    }
-}
