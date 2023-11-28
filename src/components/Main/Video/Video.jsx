@@ -17,7 +17,8 @@ function Video({ useSocket }) {
   const videoRef = useRef(null);
   const callRef = useRef(null);
   const peerRef = useRef(null)
-  
+  const [gotUser, setGotUser] = useState(false)
+
   useMemo(()=>{
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
@@ -57,6 +58,7 @@ function Video({ useSocket }) {
       socket.emit('show-room', id);
       socket.on('user-connected', (newData)=>{
         const call = peerRef.current.call(newData, video);
+        setGotUser(true)
         callRef.current = call;
         call.on('stream', (userVideo) => {
           userVideoRef.current.srcObject = userVideo;
@@ -86,6 +88,7 @@ function Video({ useSocket }) {
 
   const closeVideo = () => {
     //setUserId(null);
+    setGotUser(false)
     userVideoRef.current.srcObject = null;
     if (callRef.current) {
       callRef.current.close();
@@ -96,11 +99,11 @@ function Video({ useSocket }) {
   return (
     <>
         <div className='video-container'>
-            <div className='video-box user-two'>
-               <video className='user-video' style={{ width: '100%', height: '100%', borderRadius: '4px', objectFit: 'cover'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
+            <div className='video-box user-two' style={gotUser ? {} : {backgroundColor: 'rgba(109, 109, 109)', width: '100%'}}>
+               <video className='user-video' style={{ width: '100%', borderRadius: '4px', objectFit: 'cover'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
             </div>
             <div className='video-box user-one'>
-              <video className='user-video' style={{ width: '100%', height: '100%', borderRadius: '4px', objectFit: 'cover'}} ref={videoRef} playsInline autoPlay muted={true}></video>
+              <video className='user-video' style={{ width: '100%', borderRadius: '4px', objectFit: 'cover'}} ref={videoRef} playsInline autoPlay muted={true}></video>
             </div>
         </div>
     </>
