@@ -4,15 +4,20 @@
     /*border: 1px solid red;*/
     width: 800px;
     margin: 12px;
+    overflow: hidden;
     
 }
 
 .video-box{
+    display: flex;
+    justify-content: center;
+}
+.video-box{
+    overflow: hidden;
     background-color: rgb(109, 109, 109);
     /*border: 2px solid blue;*/
     border-radius: 4px;
     /* CHANGE THE HEIGHT OF THE VIDEO BOXES*/
-    height: 410px;
     flex-grow: 1;
     margin: 4px;
     /*
