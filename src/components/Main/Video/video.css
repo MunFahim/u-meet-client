@@ -11,14 +11,16 @@
 .video-box{
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 .user-video{
-    height: 100%;
+    height: 100%; 
+    max-width: 100%;
 }
 
-
 .video-box{
-    background-color: rgba(109, 109, 109, 0.308);
+    background-color: rgba(109, 109, 109, 0.5);
     /*border: 2px solid blue;*/
     border-radius: 4px;
     /* CHANGE THE HEIGHT OF THE VIDEO BOXES*/
@@ -43,6 +45,7 @@
     }
     .video-box{
         height: auto;
+        max-height: 410px;
     }
     .user-one{
         width: 50%;
