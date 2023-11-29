@@ -27,7 +27,13 @@
     gap: 6px;
 }
  .enter-input{
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(119, 238, 0);
     flex: 0.1
+ }
+ .enter-input:hover{
+    background-color: rgb(88, 177, 0);
  }
 
 .type-text{

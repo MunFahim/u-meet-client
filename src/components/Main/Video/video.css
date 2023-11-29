@@ -38,5 +38,6 @@
     }
     .user-two{
         flex: 2;
+        width: 90%;
     }
   }

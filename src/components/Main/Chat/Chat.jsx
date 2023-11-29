@@ -171,7 +171,7 @@ function Chat({useSocket, userIs}) {
                     sendMsg()
                   }
                 }} type='text' value={msg} onChange={handleMsgChange} maxLength={50}></input>
-                <button className='enter-input' onClick={sendMsg} disabled={found ? false : true}>Enter</button>
+                <button className='enter-input' onClick={sendMsg} disabled={found ? false : true}>Send</button>
             </div>
         </div>
     </>
