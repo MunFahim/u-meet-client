@@ -19,7 +19,7 @@
     /*border: 2px solid blue;*/
     border-radius: 4px;
     /* CHANGE THE HEIGHT OF THE VIDEO BOXES*/
-    flex-grow: 1;
+    flex: 1 1 0;
     margin: 4px;
     /*
     margin-top: 4px;
