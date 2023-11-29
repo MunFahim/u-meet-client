@@ -17,8 +17,7 @@ function Video({ useSocket }) {
   const videoRef = useRef(null);
   const callRef = useRef(null);
   const peerRef = useRef(null)
-  const [gotUser, setGotUser] = useState(false)
-  const [gotCam, setGotCam] = useState(false)
+  
   useMemo(()=>{
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
@@ -44,7 +43,6 @@ function Video({ useSocket }) {
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
       videoRef.current.srcObject = stream;
-      setGotCam(true)
       //setVideoStream(stream);
     }).catch(error=>{
       console.log('could not get camera media', error)
@@ -59,7 +57,6 @@ function Video({ useSocket }) {
       socket.emit('show-room', id);
       socket.on('user-connected', (newData)=>{
         const call = peerRef.current.call(newData, video);
-        setGotUser(true)
         callRef.current = call;
         call.on('stream', (userVideo) => {
           userVideoRef.current.srcObject = userVideo;
@@ -89,7 +86,6 @@ function Video({ useSocket }) {
 
   const closeVideo = () => {
     //setUserId(null);
-    setGotUser(false)
     userVideoRef.current.srcObject = null;
     if (callRef.current) {
       callRef.current.close();
@@ -100,10 +96,10 @@ function Video({ useSocket }) {
   return (
     <>
         <div className='video-container'>
-            <div className='video-box user-two' style={gotUser ? {backgroundColor: 'rgba(109, 109, 109, 0.425)'} : {}}>
+            <div className='video-box user-two'>
               <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%',borderRadius: '4px', objectFit: 'contain'}} ref={userVideoRef} playsInline autoPlay muted={false}></video> 
             </div>
-            <div className='video-box user-one' style={gotCam ? {backgroundColor: 'rgba(109, 109, 109, 0.425)'} : {}}>
+            <div className='video-box user-one'>
               <video className='user-video' style={{minHeight: '410px', height: '100%', width: 'auto', maxWidth:'100%', borderRadius: '4px', objectFit: 'contain'}} ref={videoRef} playsInline autoPlay muted={true}></video>
             </div>
         </div>
