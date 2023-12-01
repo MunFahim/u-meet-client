@@ -29,7 +29,8 @@
  .enter-input{
     border: none;
     border-radius: 8px;
-    background-color: rgb(119, 238, 0);
+    color: black;
+    background-color: rgb(111, 212, 9);
     flex: 0.1
  }
  .enter-input:hover{
