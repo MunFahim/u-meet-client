@@ -17,8 +17,9 @@ function Video({ useSocket }) {
   const videoRef = useRef(null);
   const callRef = useRef(null);
   const peerRef = useRef(null)
-  
-  useMemo(()=>{
+  const [found, setFound] = useState(false)
+  useEffect(()=>{
+    if (!found){
     const peer = new Peer({
       host: 'u-meet-peerserver.onrender.com',
       port: 443,
@@ -30,15 +31,16 @@ function Video({ useSocket }) {
       setId(id)
       //console.log(id)
     })
-    
+    setFound(true)
     peerRef.current = peer
+    }
     return () => {
       // Clean up Peer when the component is unmounted
       if (peerRef.current) {
         peerRef.current.destroy();
       }
     };
-  },[])
+  },[found])
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
@@ -88,6 +90,7 @@ function Video({ useSocket }) {
     //setUserId(null);
     if (peerRef.current) {
       peerRef.current.destroy();
+      setFound(false)
     }
     userVideoRef.current.srcObject = null;
     if (callRef.current) {
