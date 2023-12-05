@@ -86,6 +86,9 @@ function Video({ useSocket }) {
 
   const closeVideo = () => {
     //setUserId(null);
+    if (peerRef.current) {
+      peerRef.current.destroy();
+    }
     userVideoRef.current.srcObject = null;
     if (callRef.current) {
       callRef.current.close();
